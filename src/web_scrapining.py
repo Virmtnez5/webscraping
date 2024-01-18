@@ -5,6 +5,10 @@ from bs4 import BeautifulSoup
 # Importar la clase datetime del modulo datetime para trabajar con fechas
 from datetime import datetime
 
+def transformar_fecha(fecha_caracteres):
+    fecha = datetime(int(fecha_caracteres[0:4]), int(fecha_caracteres[4:6]),
+                     int(fecha_caracteres[6:8]))
+    return fecha
 # Funcion principal para realizar web scraping
 def webscraping(url_scraping,categoria_scraping='todas'):
     # URL de de telemadrid
@@ -58,8 +62,7 @@ def webscraping(url_scraping,categoria_scraping='todas'):
                                 # print(fecha_caracteres[8:10])
                                 # print(fecha_caracteres[10:12])
                                 # print(fecha_caracteres[12:14])
-                                fecha = datetime(int(fecha_caracteres[0:4]), int(fecha_caracteres[4:6]),
-                                                 int(fecha_caracteres[6:8]))
+                                fecha = transformar_fecha(fecha_caracteres)
                                 fecha = fecha.strftime("%Y/%m/%d")
                                 # Limpieza del titulo para evitar problemar en el archivo CSV
                                 titulo = titulo.replace('\'','').replace('"','').replace(',','')
